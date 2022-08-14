@@ -6,12 +6,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "highlight.js": "^11.6.0",
     "microcms-js-sdk": "^2.2.1",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.31",
+    "@types/highlightjs": "^9.12.2",
     "@types/node": "17.0.35",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
