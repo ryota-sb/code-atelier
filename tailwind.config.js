@@ -8,4 +8,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  // tailwindcssとMantineUIを併用するための設定
+  corePlugins: {
+    preflight: false,
+  },
 };
