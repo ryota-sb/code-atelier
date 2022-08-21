@@ -1,14 +1,19 @@
 import { NextPage, InferGetStaticPropsType } from "next";
-import Link from "next/link";
-import { useState } from "react";
 import { Blog } from "types/blog";
 import { client } from "libs/client";
 
-import { NavbarComponent } from "../components/NavbarComponent";
 import { FooterComponent } from "../components/FooterComponent";
 
 // Mantine UI
-import { AppShell, Header, Burger, Title } from "@mantine/core";
+import {
+  AppShell,
+  Header,
+  Title,
+  Card,
+  Text,
+  Image,
+  Grid,
+} from "@mantine/core";
 
 export const getStaticProps = async () => {
   const blog = await client.get({ endpoint: "blog" });
@@ -26,36 +31,36 @@ type Props = {
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blogs,
 }: Props) => {
-  const [opened, setOpened] = useState<boolean>(false);
-
   return (
     <AppShell
       header={
         <Header height={60}>
           <div className="flex align-middle h-full">
-            <Burger
-              opened={opened}
-              onClick={() => setOpened((open) => !open)}
-              size="sm"
-              mr="xl"
-            />
             <Title>Run Dev</Title>
           </div>
         </Header>
       }
-      navbar={<NavbarComponent opened={opened} />}
       footer={<FooterComponent />}
     >
       <main className="flex flex-1 flex-col justify-center p-4">
-        <ul>
+        <Grid>
           {blogs.map((blog) => (
-            <li key={blog.id}>
-              <Link href={`/blog/${blog.id}`}>
-                <a>{blog.title}</a>
-              </Link>
-            </li>
+            <Grid.Col sm={6} md={4} lg={3}>
+              <Card shadow="sm" p="xl" component="a" href={`/blog/${blog.id}`}>
+                <Card.Section>
+                  <Image
+                    src="https://images.unsplash.com/photo-1579227114347-15d08fc37cae?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+                    height={160}
+                    alt="image"
+                  />
+                </Card.Section>
+                <Text weight={500} mt="md">
+                  {blog.title}
+                </Text>
+              </Card>
+            </Grid.Col>
           ))}
-        </ul>
+        </Grid>
       </main>
     </AppShell>
   );
