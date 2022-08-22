@@ -2,18 +2,13 @@ import { NextPage, InferGetStaticPropsType } from "next";
 import { Blog } from "types/blog";
 import { client } from "libs/client";
 
+import Link from "next/link";
+import Image from "next/image";
+
 import { FooterComponent } from "../components/FooterComponent";
 
 // Mantine UI
-import {
-  AppShell,
-  Header,
-  Title,
-  Card,
-  Text,
-  Image,
-  Grid,
-} from "@mantine/core";
+import { AppShell, Header, Title, Card, Text, Grid } from "@mantine/core";
 
 export const getStaticProps = async () => {
   const blog = await client.get({ endpoint: "blog" });
@@ -31,6 +26,7 @@ type Props = {
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blogs,
 }: Props) => {
+  console.log(blogs);
   return (
     <AppShell
       header={
@@ -46,18 +42,23 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <Grid>
           {blogs.map((blog) => (
             <Grid.Col sm={6} md={4} lg={3}>
-              <Card shadow="sm" p="xl" component="a" href={`/blog/${blog.id}`}>
-                <Card.Section>
-                  <Image
-                    src="https://images.unsplash.com/photo-1579227114347-15d08fc37cae?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                    height={160}
-                    alt="image"
-                  />
-                </Card.Section>
-                <Text weight={500} mt="md">
-                  {blog.title}
-                </Text>
-              </Card>
+              <Link href={`/blog/${blog.id}`}>
+                <Card shadow="sm" p="xl">
+                  <Card.Section>
+                    <Image
+                      src={blog.image.url}
+                      objectFit="contain"
+                      height={160}
+                      width={500}
+                      alt="image"
+                    />
+                  </Card.Section>
+                  <Text>{blog.createdAt}</Text>
+                  <Text weight={500} mt="md">
+                    {blog.title}
+                  </Text>
+                </Card>
+              </Link>
             </Grid.Col>
           ))}
         </Grid>
