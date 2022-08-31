@@ -1,4 +1,4 @@
-import { NextPage, InferGetStaticPropsType } from "next";
+import { NextPage, InferGetStaticPropsType, GetStaticProps } from "next";
 import { Blog } from "types/blog";
 import { client } from "libs/client";
 
@@ -10,7 +10,11 @@ import { FooterComponent } from "../components/FooterComponent";
 // Mantine UI
 import { AppShell, Header, Title, Card, Text, Grid } from "@mantine/core";
 
-export const getStaticProps = async () => {
+type Props = {
+  blogs: Blog[];
+};
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const blog = await client.get({ endpoint: "blog" });
   return {
     props: {
@@ -19,14 +23,12 @@ export const getStaticProps = async () => {
   };
 };
 
-type Props = {
-  blogs: Blog[];
-};
+const getFormattedDate = (date: Date): string =>
+  new Date(date).toLocaleDateString();
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blogs,
 }: Props) => {
-  console.log(blogs);
   return (
     <AppShell
       header={
@@ -41,7 +43,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <main className="flex flex-1 flex-col justify-center p-4">
         <Grid>
           {blogs.map((blog) => (
-            <Grid.Col sm={6} md={4} lg={3}>
+            <Grid.Col sm={6} md={4} lg={3} key={blog.id}>
               <Link href={`/blog/${blog.id}`}>
                 <Card shadow="sm" p="xl">
                   <Card.Section>
@@ -53,7 +55,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                       alt="image"
                     />
                   </Card.Section>
-                  <Text>{blog.createdAt}</Text>
+                  <Text>{getFormattedDate(blog.createdAt)}</Text>
                   <Text weight={500} mt="md">
                     {blog.title}
                   </Text>
