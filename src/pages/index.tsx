@@ -5,11 +5,6 @@ import { client } from "libs/client";
 import Link from "next/link";
 import Image from "next/image";
 
-import { FooterComponent } from "../components/FooterComponent";
-
-// Mantine UI
-import { AppShell, Header, Title, Card, Text, Grid } from "@mantine/core";
-
 type Props = {
   blogs: Blog[];
 };
@@ -23,6 +18,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 };
 
+// 日付のフォーマット変更
 const getFormattedDate = (date: Date): string =>
   new Date(date).toLocaleDateString();
 
@@ -30,42 +26,45 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blogs,
 }: Props) => {
   return (
-    <AppShell
-      header={
-        <Header height={60}>
-          <div className="flex align-middle h-full">
-            <Title>Run Dev</Title>
-          </div>
-        </Header>
-      }
-      footer={<FooterComponent />}
-    >
-      <main className="flex flex-1 flex-col justify-center p-4">
-        <Grid>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+          Ryota Code .
+        </h2>
+
+        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {blogs.map((blog) => (
-            <Grid.Col sm={6} md={4} lg={3} key={blog.id}>
-              <Link href={`/blog/${blog.id}`}>
-                <Card shadow="sm" p="xl">
-                  <Card.Section>
-                    <Image
-                      src={blog.image.url}
-                      objectFit="contain"
-                      height={160}
-                      width={500}
-                      alt="image"
-                    />
-                  </Card.Section>
-                  <Text>{getFormattedDate(blog.createdAt)}</Text>
-                  <Text weight={500} mt="md">
-                    {blog.title}
-                  </Text>
-                </Card>
-              </Link>
-            </Grid.Col>
+            <div className="group relative">
+              <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                <Image
+                  src={blog.image.url}
+                  alt="Front of men&#039;s Basic Tee in black."
+                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#">
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-0"
+                      ></span>
+                      {blog.title}
+                    </a>
+                  </h3>
+                </div>
+                <p className="text-sm font-medium text-gray-900">
+                  {getFormattedDate(blog.createdAt)}
+                </p>
+              </div>
+            </div>
           ))}
-        </Grid>
-      </main>
-    </AppShell>
+        </div>
+      </div>
+    </div>
   );
 };
 
