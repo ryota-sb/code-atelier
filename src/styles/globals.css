@@ -1,3 +1,8 @@
+/* Raleway */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap");
+/* Reggae One */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&family=Reggae+One&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

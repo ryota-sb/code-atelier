@@ -5,7 +5,12 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+        reggae: ["Reggae One", "cursive"],
+      },
+    },
   },
   plugins: [],
   // tailwindcssとMantineUIを併用するための設定
