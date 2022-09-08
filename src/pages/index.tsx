@@ -28,22 +28,24 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   console.log(blogs);
   return (
     <div className="container mx-auto w-full">
-      <h1 className="text-5xl px-10 font-raleway">Ryota Code .</h1>
-      <div className="container grid grid-cols-3 gap-10 items-center w-full px-10">
+      <h1 className="px-10 font-raleway text-5xl">Ryota Code .</h1>
+      <div className="container grid w-full grid-cols-3 items-center gap-10 px-10">
         {blogs.map((blog) => (
-          <div className="shadow-md rounded-lg px-6" key={blog.id}>
-            <Image
-              src={blog.image.url}
-              alt={blog.title}
-              width={350}
-              height={150}
-              objectFit="contain"
-            />
-            <h3 className="text-center truncate">{blog.title}</h3>
-            <p className="flex justify-end">
-              {getFormattedDate(blog.createdAt)}
-            </p>
-          </div>
+          <Link href={`/blog/${blog.id}`} key={blog.id}>
+            <div className="cursor-pointer rounded-lg px-6 shadow-md hover:scale-110 hover:duration-300">
+              <Image
+                src={blog.image.url}
+                alt={blog.title}
+                width={350}
+                height={150}
+                objectFit="contain"
+              />
+              <h3 className="truncate text-center">{blog.title}</h3>
+              <p className="flex justify-end">
+                {getFormattedDate(blog.createdAt)}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
