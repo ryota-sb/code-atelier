@@ -38,6 +38,10 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (ctx) => {
   };
 };
 
+// 日付のフォーマット変更
+const getFormattedDate = (date: Date): string =>
+  new Date(date).toLocaleDateString();
+
 type Props = {
   blog: Blog;
 };
@@ -46,11 +50,11 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blog,
 }: Props) => {
   return (
-    <main>
-      <h1>{blog.title}</h1>
-      <p>{blog.publishedAt}</p>
+    <div className="container prose mx-auto my-10 h-full w-max rounded border p-10 shadow-md">
+      <h1 className="font-notoserif">{blog.title}</h1>
+      <p>{getFormattedDate(blog.publishedAt)}</p>
       <div dangerouslySetInnerHTML={{ __html: `${blog.body}` }}></div>
-    </main>
+    </div>
   );
 };
 
