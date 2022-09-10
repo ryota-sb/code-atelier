@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
         reggae: ["Reggae One", "cursive"],
+        notoserif: ["Noto Serif JP", "serif"],
       },
     },
   },

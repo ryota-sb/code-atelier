@@ -2,6 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap");
 /* Reggae One */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&family=Reggae+One&display=swap");
+/* Noto Serif Japanese */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&family=Raleway:wght@200&family=Reggae+One&display=swap");
 
 @tailwind base;
 @tailwind components;
