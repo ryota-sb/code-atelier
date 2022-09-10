@@ -5,6 +5,6 @@ export type Blog = {
   image: { url: string };
   createdAt: Date;
   updatedAt: Date;
-  publishedAt: string;
+  publishedAt: Date;
   revisedAt: string;
 };
