@@ -27,7 +27,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }: Props) => {
   console.log(blogs);
   return (
-    <div className="h-screen w-screen bg-gray-100">
+    <div className="h-screen w-screen bg-blue-50">
       <div className="max-w-7x container mx-auto  px-10">
         <h1 className="px-10 py-10 font-raleway text-4xl lg:text-5xl">
           Ryota Code .
@@ -35,20 +35,20 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-2 lg:grid-cols-2">
           {blogs.map((blog) => (
             <Link href={`/blog/${blog.id}`} key={blog.id}>
-              <div className="cursor-pointer rounded-lg bg-white px-6 shadow-md hover:scale-110 hover:duration-300">
+              <div className="cursor-pointer bg-white p-4 shadow-md hover:scale-110 hover:duration-300">
+                <p className="flex justify-end font-notoserif">
+                  {getFormattedDate(blog.createdAt)}
+                </p>
                 <Image
                   src={blog.image.url}
                   alt={blog.title}
-                  width={500}
-                  height={250}
+                  width={660}
+                  height={200}
                   objectFit="contain"
                 />
-                <h3 className="truncate text-center font-notoserif text-2xl">
+                <h3 className="truncate text-center font-notoserif md:text-lg lg:text-2xl">
                   {blog.title}
                 </h3>
-                <p className="flex justify-end py-4">
-                  {getFormattedDate(blog.createdAt)}
-                </p>
               </div>
             </Link>
           ))}
