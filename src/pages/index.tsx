@@ -1,9 +1,14 @@
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
-import { Blog } from "types/blog";
-import { client } from "libs/client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+
+import { Blog } from "types/blog";
+
+// microCMSのクライアント取得
+import { client } from "libs/client";
+
+import Footer from "components/Footer";
 
 type Props = {
   blogs: Blog[];
@@ -25,37 +30,57 @@ const getFormattedDate = (date: Date): string =>
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blogs,
 }: Props) => {
-  console.log(blogs);
   return (
-    <div className="h-screen w-screen bg-blue-50">
-      <div className="max-w-7x container mx-auto  px-10">
-        <h1 className="px-10 py-10 font-raleway text-4xl lg:text-5xl">
+    <div className="min-h-screen bg-blue-100">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:max-w-7xl lg:px-8">
+        <h1 className="px-10 py-16 font-raleway text-4xl lg:text-5xl">
           Ryota Code .
         </h1>
-        <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-2 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-y-8 gap-x-8 sm:grid-cols-2">
           {blogs.map((blog) => (
-            <Link href={`/blog/${blog.id}`} key={blog.id}>
-              <div className="cursor-pointer bg-white p-4 shadow-md hover:scale-110 hover:duration-300">
-                <p className="flex justify-end font-notoserif">
-                  {getFormattedDate(blog.createdAt)}
-                </p>
-                <Image
-                  src={blog.image.url}
-                  alt={blog.title}
-                  width={660}
-                  height={200}
-                  objectFit="contain"
-                />
-                <h3 className="truncate text-center font-notoserif md:text-lg lg:text-2xl">
-                  {blog.title}
-                </h3>
-              </div>
-            </Link>
+            <BlurImage key={blog.id} blog={blog} />
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
+};
+
+const BlurImage = ({ blog }: { blog: Blog }) => {
+  const [isLoading, setLoading] = useState(true);
+
+  return (
+    <Link href={`/blog/${blog.id}`}>
+      <div className="group cursor-pointer">
+        <div className="aspect-w-16 aspect-h-9 w-full overflow-hidden rounded bg-gray-200">
+          <Image
+            src={blog.image.url}
+            alt=""
+            layout="fill"
+            objectFit="cover"
+            className={cn(
+              "duration-700 ease-in-out group-hover:opacity-40",
+              isLoading
+                ? "scale-100 blur-2xl grayscale"
+                : "scale-100 blur-0 grayscale-0"
+            )}
+            onLoadingComplete={() => setLoading(false)}
+          />
+        </div>
+        <h3 className="mt-4 font-notoserif text-2xl text-gray-900">
+          {blog.title}
+        </h3>
+        <p className="mt-1 font-notoserif text-lg font-medium text-gray-900">
+          {getFormattedDate(blog.createdAt)}
+        </p>
+      </div>
+    </Link>
+  );
+};
+
+const cn = (...classes: string[]) => {
+  return classes.filter(Boolean).join(" ");
 };
 
 export default Home;
