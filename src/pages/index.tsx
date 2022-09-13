@@ -32,7 +32,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }: Props) => {
   return (
     <div className="min-h-screen bg-blue-100">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto  max-w-7xl px-6 sm:px-8 lg:max-w-7xl lg:px-8">
         <h1 className="px-10 py-16 font-raleway text-4xl lg:text-5xl">
           Ryota Code .
         </h1>
