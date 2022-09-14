@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const Footer: FC = () => {
   return (
-    <footer className="mt-10 bg-white p-4">
+    <footer className="sticky bottom-0 mt-10 bg-white p-4">
       <div className="flex items-center justify-between">
         <p>Copyright © 2022 - All right reserved</p>
         <div className="flex gap-4 md:place-self-center">
