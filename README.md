@@ -20,3 +20,15 @@ yarn add @fortawesome/free-regular-svg-icons
 yarn add @fortawesome/free-brands-svg-icons
 yarn add @fortawesome/react-fontawesome@latest
 ```
+
+# TailwindCSS ライブラリ
+
+### アスペクト比の指定を簡単にできるようにするためのライブラリ
+
+yarn add @tailwindcss/aspect-ratio
+
+### 自動的にいい感じになるように CSS を付与してくれるライブラリ
+
+#### 使用時は、親要素の class に prose をつける
+
+yarn add @tailwindcss/typography
