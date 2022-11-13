@@ -4,7 +4,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Footer: FC = () => {
   return (
-    <footer className="sticky bottom-0 mt-10 bg-white p-4">
+    <footer className="sticky bottom-0 bg-white p-4">
       <div className="flex items-center justify-between">
         <p>Copyright © 2022 - All right reserved</p>
         <div className="flex gap-4 md:place-self-center">
