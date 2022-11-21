@@ -6,8 +6,7 @@ import { Blog, Tag } from "types/blog";
 // microCMSのクライアント取得
 import { client } from "libs/client";
 
-import Footer from "components/Footer";
-import Header from "components/Header";
+import Layout from "components/Layout";
 import BlurImage from "components/BlurImage ";
 
 // FontAwesome アイコン
@@ -40,8 +39,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   tags,
 }: Props) => {
   return (
-    <div className="flex h-screen flex-col bg-blue-100">
-      <Header />
+    <Layout>
       <div className="grid flex-grow grid-cols-6 p-14">
         {/* 記事一覧 */}
         <div className="col-span-5 bg-white">
@@ -104,8 +102,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 
