@@ -1,25 +1,32 @@
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
 
-import { Blog } from "types/blog";
+import { Blog, Tag } from "types/blog";
 
 // microCMSのクライアント取得
 import { client } from "libs/client";
 
 import Footer from "components/Footer";
 import Header from "components/Header";
+import BlurImage from "components/BlurImage ";
+
+// FontAwesome アイコン
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   blogs: Blog[];
+  tags: Tag[];
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const blog = await client.get({ endpoint: "blog" });
+  const tag = await client.get({ endpoint: "tag" });
   return {
     props: {
       blogs: blog.contents,
+      tags: tag.contents,
     },
   };
 };
@@ -30,6 +37,7 @@ const getFormattedDate = (date: Date): string =>
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blogs,
+  tags,
 }: Props) => {
   return (
     <div className="flex h-screen flex-col bg-blue-100">
@@ -39,72 +47,66 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className="col-span-5 bg-white">
           <div className="m-8 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {blogs.map((blog) => (
-              <BlurImage key={blog.id} blog={blog} />
+              <div>
+                <BlurImage key={blog.id} blog={blog} />
+
+                <div className="mt-2 flex items-center">
+                  <FontAwesomeIcon icon={faTag} />
+                  {blog.tags.map((tag) => (
+                    <div className="flex pl-2">
+                      <p className="font-raleway text-sm">#{tag.tag}</p>
+                    </div>
+                  ))}
+                </div>
+                <h3 className="mt-4 font-notoserif text-2xl text-gray-900">
+                  {blog.title}
+                </h3>
+                <div className="mt-1 flex items-center font-notoserif text-sm font-medium text-gray-900">
+                  <FontAwesomeIcon icon={faClock} />
+                  <p className="pl-2">{getFormattedDate(blog.createdAt)}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
 
         <div className="col-span-1 ml-14">
           {/* About Me */}
-          <div className="mb-14 bg-white p-4">
-            <div className="grid grid-cols-6">
-              <div className="aspect-w-1 aspect-h-1 col-span-3">
+          <div className="mb-14 bg-white p-6">
+            <div className="grid grid-cols-2 gap-x-6">
+              <div className="aspect-w-1 aspect-h-1 col-span-1">
                 <Image
                   src="/imgs/ryota.jpg"
                   layout="fill"
                   objectFit="contain"
-                  className=""
+                  className="rounded-md"
                 />
               </div>
-              <div className="col-span-3">
-                <h1>Matsui Ryota</h1>
+              <div className="col-span-1">
+                <h1 className="font-raleway">Matsui Ryota</h1>
               </div>
             </div>
           </div>
 
           {/* タグ一覧 */}
-          <div className="bg-white">Tags Field</div>
+          <div className="bg-white">
+            <div className="flex items-center border-b px-6 py-4">
+              <FontAwesomeIcon icon={faTag} />
+              <h2 className="pl-2 font-raleway text-xl">Tags</h2>
+            </div>
+            {tags.map((tag) => (
+              <ul key={tag.id} className="px-6 py-4">
+                <button>
+                  <li>{tag.tag}</li>
+                </button>
+              </ul>
+            ))}
+          </div>
         </div>
       </div>
       <Footer />
     </div>
   );
-};
-
-const BlurImage = ({ blog }: { blog: Blog }) => {
-  const [isLoading, setLoading] = useState(true);
-
-  return (
-    <Link href={`/blog/${blog.id}`}>
-      <div className="group cursor-pointer">
-        <div className="aspect-w-16 aspect-h-9 w-full overflow-hidden border border-gray-200 bg-gray-200">
-          <Image
-            src={blog.image.url}
-            alt=""
-            layout="fill"
-            objectFit="cover"
-            className={cn(
-              "duration-700 ease-in-out group-hover:opacity-40",
-              isLoading
-                ? "scale-100 blur-2xl grayscale"
-                : "scale-100 blur-0 grayscale-0"
-            )}
-            onLoadingComplete={() => setLoading(false)}
-          />
-        </div>
-        <h3 className="mt-4 font-notoserif text-2xl text-gray-900">
-          {blog.title}
-        </h3>
-        <p className="mt-1 font-notoserif text-sm font-medium text-gray-900">
-          {getFormattedDate(blog.createdAt)}
-        </p>
-      </div>
-    </Link>
-  );
-};
-
-const cn = (...classes: string[]) => {
-  return classes.filter(Boolean).join(" ");
 };
 
 export default Home;
