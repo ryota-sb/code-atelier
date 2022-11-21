@@ -45,13 +45,13 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className="col-span-5 bg-white">
           <div className="m-8 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {blogs.map((blog) => (
-              <div>
-                <BlurImage key={blog.id} blog={blog} />
+              <div key={blog.id}>
+                <BlurImage blog={blog} />
 
                 <div className="mt-2 flex items-center">
                   <FontAwesomeIcon icon={faTag} />
                   {blog.tags.map((tag) => (
-                    <div className="flex pl-2">
+                    <div className="flex pl-2" key={tag.id}>
                       <p className="font-raleway text-sm">#{tag.tag}</p>
                     </div>
                   ))}
