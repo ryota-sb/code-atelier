@@ -45,7 +45,6 @@ export const getStaticProps: GetStaticProps<Props, { id: string }> = async ({
 export const getStaticPaths: GetStaticPaths = async () => {
   const data = await client.get({ endpoint: "tag" });
   const paths = data.contents.map((content: Tag) => `/tagsBlog/${content.id}`);
-  console.log(paths);
   return { paths, fallback: false };
 };
 
