@@ -4,23 +4,28 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from "next";
-import { client } from "libs/client";
-import type { Blog } from "types/blog";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
+import { client } from "libs/client";
+
+import type { Blog } from "types/blog";
+
+import Layout from "components/Layout";
+
+// ブログ記事のコード部分にシンタックスハイライトをつけるためのモジュール
 import cheerio from "cheerio";
 import hljs from "highlight.js";
 import "highlight.js/styles/hybrid.css";
 
-// 動的パスの設定
-export const getStaticPaths: GetStaticPaths<Params> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const data = await client.get({ endpoint: "blog" });
-  const paths = data.contents.map((content: any) => `/blog/${content.id}`);
+  const paths = data.contents.map((content: Blog) => `/blog/${content.id}`);
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<Props, Params> = async (ctx) => {
-  const id = ctx.params?.id;
+export const getStaticProps: GetStaticProps<Props, { id: string }> = async ({
+  params,
+}) => {
+  const id = params?.id;
   const blog = await client.get({ endpoint: "blog", contentId: id });
 
   const $ = cheerio.load(blog.body || "");
@@ -50,15 +55,13 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blog,
 }: Props) => {
   return (
-    <div className="h-screen w-screen bg-blue-100 py-10 px-10">
-      <h1 className="pb-10 text-center font-notoserif text-3xl">
-        {blog.title}
-      </h1>
+    <Layout>
+      <h1 className="p-10 text-center font-notoserif text-3xl">{blog.title}</h1>
       <div className="container prose mx-auto h-full max-w-screen-lg border bg-white p-10 shadow-md">
         <p>{getFormattedDate(blog.publishedAt)}</p>
         <div dangerouslySetInnerHTML={{ __html: `${blog.body}` }}></div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
