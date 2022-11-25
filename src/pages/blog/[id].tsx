@@ -49,17 +49,19 @@ const getFormattedDate = (date: Date): string =>
 
 type Props = {
   blog: Blog;
+  highlightedBody: string;
 };
 
 const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   blog,
+  highlightedBody,
 }: Props) => {
   return (
     <Layout>
       <h1 className="p-10 text-center font-notoserif text-3xl">{blog.title}</h1>
       <div className="container prose mx-auto h-full max-w-screen-lg border bg-white p-10 shadow-md">
         <p>{getFormattedDate(blog.publishedAt)}</p>
-        <div dangerouslySetInnerHTML={{ __html: `${blog.body}` }}></div>
+        <div dangerouslySetInnerHTML={{ __html: highlightedBody }}></div>
       </div>
     </Layout>
   );
