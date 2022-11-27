@@ -1,8 +1,4 @@
 {
-  "extends": [
-    "next/babel",
-    "next/core-web-vitals",
-    "plugin:tailwindcss/recommended"
-  ],
+  "extends": ["next", "next/core-web-vitals", "plugin:tailwindcss/recommended"],
   "plugins": ["tailwindcss"]
 }
