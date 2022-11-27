@@ -58,10 +58,14 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }: Props) => {
   return (
     <Layout>
-      <h1 className="p-10 text-center font-notoserif text-3xl">{blog.title}</h1>
-      <div className="container prose mx-auto h-full max-w-screen-lg border bg-white p-10 shadow-md">
-        <p>{getFormattedDate(blog.publishedAt)}</p>
-        <div dangerouslySetInnerHTML={{ __html: highlightedBody }}></div>
+      <div className="flex-grow">
+        <h1 className="p-10 text-center font-notoserif text-3xl">
+          {blog.title}
+        </h1>
+        <div className="prose mx-auto mb-10 min-h-screen max-w-screen-lg border bg-white p-10 shadow-md">
+          <p>{getFormattedDate(blog.publishedAt)}</p>
+          <div dangerouslySetInnerHTML={{ __html: highlightedBody }}></div>
+        </div>
       </div>
     </Layout>
   );

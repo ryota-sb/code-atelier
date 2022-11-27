@@ -17,9 +17,9 @@ type Props = { blogs: Blog[]; tags: Tag[] };
 
 export default function Post({ blogs, tags }: Props) {
   return (
-    <div className="grid flex-grow grid-cols-6 p-14">
+    <div className="grid flex-grow p-6 lg:p-8 xl:grid-cols-6 xl:p-10">
       {/* 記事一覧 */}
-      <div className="col-span-5 bg-white">
+      <div className="min-h-screen bg-white lg:col-span-5">
         <div className="m-8 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
           {blogs.map((blog) => (
             <div key={blog.id}>
@@ -33,21 +33,23 @@ export default function Post({ blogs, tags }: Props) {
                   </div>
                 ))}
               </div>
-              <h3 className="mt-4 font-notoserif text-2xl text-gray-900">
-                {blog.title}
-              </h3>
-              <div className="mt-1 flex items-center font-notoserif text-sm font-medium text-gray-900">
-                <FontAwesomeIcon icon={faClock} />
-                <p className="pl-2">{getFormattedDate(blog.createdAt)}</p>
+              <div className="mb-8 mt-4 flex items-center justify-between">
+                <h3 className="font-notoserif text-2xl text-gray-900">
+                  {blog.title}
+                </h3>
+                <div className="mt-1 flex items-center font-notoserif text-sm font-medium text-gray-900">
+                  <FontAwesomeIcon icon={faClock} />
+                  <p className="pl-2">{getFormattedDate(blog.createdAt)}</p>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="col-span-1 ml-14">
+      <div className="ml-10 hidden lg:col-span-1 lg:inline-block">
         {/* About Me */}
-        <div className="mb-14 bg-white p-6">
+        <div className="mb-10 bg-white p-6">
           <div className="grid grid-cols-2 gap-x-6">
             <div className="aspect-w-1 aspect-h-1 col-span-1">
               <Image
