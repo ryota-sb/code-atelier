@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-const Header: FC = () => {
+export default function Header() {
   return (
     <header>
       <div className="bg-white drop-shadow-md">
@@ -10,6 +8,4 @@ const Header: FC = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}
