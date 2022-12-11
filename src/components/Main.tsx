@@ -53,7 +53,7 @@ export default function Post({ blogs, tags }: Props) {
                 ))}
               </div>
               <div className="mb-8 mt-4 flex items-center justify-between">
-                <h3 className="font-notoserif text-2xl text-gray-900">
+                <h3 className="truncate font-notoserif text-xl text-gray-900">
                   {blog.title}
                 </h3>
                 <div className="mt-1 flex items-center font-notoserif text-sm font-medium text-gray-900">
