@@ -56,9 +56,9 @@ export default function Post({ blogs, tags }: Props) {
                 <h3 className="truncate font-notoserif text-xl text-gray-900">
                   {blog.title}
                 </h3>
-                <div className="mt-1 flex items-center font-notoserif text-sm font-medium text-gray-900">
+                <div className="mt-1 flex items-center gap-1 font-notoserif text-sm font-medium text-gray-900">
                   <FontAwesomeIcon icon={faClock} />
-                  <p className="pl-2">{getFormattedDate(blog.createdAt)}</p>
+                  <p>{getFormattedDate(blog.createdAt)}</p>
                 </div>
               </div>
             </div>
