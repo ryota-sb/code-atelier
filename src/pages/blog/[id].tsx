@@ -11,6 +11,10 @@ import type { Blog } from "types/blog";
 
 import Layout from "components/Layout";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { faRotate } from "@fortawesome/free-solid-svg-icons";
+
 // ブログ記事のコード部分にシンタックスハイライトをつけるためのモジュール
 import cheerio from "cheerio";
 import hljs from "highlight.js";
@@ -62,8 +66,17 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <h1 className="p-10 text-center font-notoserif text-3xl">
           {blog.title}
         </h1>
-        <div className="prose mx-auto mb-10 min-h-screen max-w-screen-lg border bg-white p-10 shadow-md">
-          <p>{getFormattedDate(blog.publishedAt)}</p>
+        <div className="prose mx-auto mb-10 min-h-screen max-w-screen-lg bg-white p-10 shadow-md">
+          <div className="flex justify-between">
+            <div className="flex items-center gap-1">
+              <FontAwesomeIcon icon={faClock} />
+              <p className="m-0">{getFormattedDate(blog.publishedAt)}</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <FontAwesomeIcon icon={faRotate} />
+              <p className="m-0">{getFormattedDate(blog.updatedAt)}</p>
+            </div>
+          </div>
           <div dangerouslySetInnerHTML={{ __html: highlightedBody }}></div>
         </div>
       </div>
