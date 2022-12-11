@@ -15,6 +15,19 @@ const getFormattedDate = (date: Date): string =>
 
 type Props = { blogs: Blog[]; tags: Tag[] };
 
+// 今日の日付 - 記事投稿日
+function getDateDifference(date: Date) {
+  const getToday = new Date().getTime();
+  const createAt = new Date(date).getTime();
+  return getToday - createAt;
+}
+
+// 記事投稿から３日以内ならtrue
+function isWithinThreeDays(date: Date) {
+  const CONVERT_3_DAYS_TO_MILLISECONDS = 259200000;
+  return getDateDifference(date) <= CONVERT_3_DAYS_TO_MILLISECONDS;
+}
+
 export default function Post({ blogs, tags }: Props) {
   return (
     <div className="grid flex-grow p-6 lg:p-8 xl:grid-cols-6 xl:p-10">
@@ -22,7 +35,13 @@ export default function Post({ blogs, tags }: Props) {
       <div className="min-h-screen bg-white lg:col-span-5">
         <div className="m-8 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
           {blogs.map((blog) => (
-            <div key={blog.id}>
+            <div key={blog.id} className="relative">
+              {/* new state */}
+              <div className="absolute top-4 -left-4 z-10 w-28 bg-white">
+                <div className="text-center font-raleway">
+                  {isWithinThreeDays(blog.createdAt) ? <p>New</p> : <></>}
+                </div>
+              </div>
               <BlurImage blog={blog} />
 
               <div className="mt-2 flex items-center">
