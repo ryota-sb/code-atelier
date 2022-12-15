@@ -39,7 +39,7 @@ export default function Post({ blogs, tags }: Props) {
               {/* new state */}
               <div className="absolute top-4 -left-4 z-10 w-28 bg-white">
                 <div className="text-center font-raleway">
-                  {isWithinThreeDays(blog.createdAt) ? <p>New</p> : <></>}
+                  {isWithinThreeDays(blog.createdAt) ? <p>New</p> : null}
                 </div>
               </div>
               <BlurImage blog={blog} />
@@ -66,7 +66,7 @@ export default function Post({ blogs, tags }: Props) {
         </div>
       </div>
 
-      <div className="ml-10 hidden lg:col-span-1 lg:inline-block">
+      <div className="ml-10 hidden lg:col-span-1 xl:inline-block">
         {/* About Me */}
         <div className="mb-10 bg-white p-6">
           <div className="grid grid-cols-2 gap-x-6">
@@ -76,6 +76,7 @@ export default function Post({ blogs, tags }: Props) {
                 layout="fill"
                 objectFit="contain"
                 className="rounded-md"
+                alt="Ryota"
               />
             </div>
             <div className="col-span-1">
