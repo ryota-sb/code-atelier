@@ -62,9 +62,7 @@ export default function Tags({ tags }: Props) {
               <FontAwesomeIcon icon={faRotate} className="cursor-pointer" />
             </Link>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
       {tags.map((tag) => (
         <ul key={tag.id} className="py-2 px-6">
