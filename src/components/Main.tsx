@@ -1,7 +1,5 @@
-import Image from "next/image";
-
 import BlurImage from "components/BlurImage";
-import Tags from "components/Tags";
+import SideMenu from "components/SideMenu";
 
 import type { Blog, Tag } from "types/blog";
 
@@ -66,28 +64,7 @@ export default function Post({ blogs, tags }: Props) {
         </div>
       </div>
 
-      <div className="ml-10 hidden lg:col-span-1 xl:inline-block">
-        {/* About Me */}
-        <div className="mb-10 bg-white p-6">
-          <div className="grid grid-cols-2 gap-x-6">
-            <div className="aspect-w-1 aspect-h-1 col-span-1">
-              <Image
-                src="/imgs/ryota.jpg"
-                layout="fill"
-                objectFit="contain"
-                className="rounded-md"
-                alt="Ryota"
-              />
-            </div>
-            <div className="col-span-1">
-              <h1 className="font-raleway">Matsui Ryota</h1>
-            </div>
-          </div>
-        </div>
-
-        {/* タグ一覧 */}
-        <Tags tags={tags} />
-      </div>
+      <SideMenu tags={tags} />
     </div>
   );
 }

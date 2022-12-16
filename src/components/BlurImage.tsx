@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState } from "react";
 
 import type { Blog } from "types/blog";
