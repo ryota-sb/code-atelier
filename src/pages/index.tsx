@@ -1,4 +1,5 @@
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 
 import { Blog, Tag } from "types/blog";
 
@@ -30,6 +31,13 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }: Props) => {
   return (
     <Layout>
+      <Head>
+        <title>Code Atelier</title>
+        <meta
+          name="discription"
+          content="Code Atelier では、プログラミング関係の記事をメインに載せています。"
+        />
+      </Head>
       <Main blogs={blogs} tags={tags} />
     </Layout>
   );
