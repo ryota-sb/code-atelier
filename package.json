@@ -19,7 +19,6 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@tailwindcss/typography": "^0.5.7",
     "cheerio": "^1.0.0-rc.12",
-    "daisyui": "^2.45.0",
     "highlight.js": "^11.6.0",
     "microcms-js-sdk": "^2.2.1",
     "next": "latest",
