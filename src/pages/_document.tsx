@@ -5,7 +5,7 @@ import { GA_ID } from "libs/gtag";
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang={"ja"} dir={"ltr"}>
+      <Html lang="ja" dir="ltr" prefix="og: http://ogp.me/ns#">
         <Head>
           {/* Google Analytics 埋め込みタグ */}
           {GA_ID && (
