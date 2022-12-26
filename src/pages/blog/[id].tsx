@@ -63,7 +63,13 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }: Props) => {
   return (
     <Layout>
-      <HeadMeta title={blog.title} description={blog.description}></HeadMeta>
+      <HeadMeta
+        title={blog.title}
+        description={blog.description}
+        url={`https://code-atelier.vercel.app/blog/${blog.id}`}
+        type="article"
+        imageUrl={blog.image.url}
+      />
       <div className="flex-grow">
         <h1 className="p-10 text-center font-notoserif text-3xl">
           {blog.title}
