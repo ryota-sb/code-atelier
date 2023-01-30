@@ -37,14 +37,6 @@ yarn add @tailwindcss/aspect-ratio
 yarn add @tailwindcss/typography
 ```
 
-### Daisy UI
-
-```
-npm install daisyui
-```
-
-#### サイドバー実装用に使用
-
 # Google Analytics 導入
 
 ### TypeScript に対応

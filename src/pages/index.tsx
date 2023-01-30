@@ -1,5 +1,5 @@
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
-import HeadMeta from "components/HeadMeta";
+// import HeadMeta from "components/HeadMeta";
 
 import { Blog, Tag } from "types/blog";
 
