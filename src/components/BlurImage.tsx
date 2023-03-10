@@ -17,7 +17,7 @@ export default function BlurImage({ blog }: { blog: Blog }) {
         <div className="aspect-w-16 aspect-h-9 w-full overflow-hidden border border-gray-200 bg-gray-200">
           <Image
             src={blog.image.url}
-            alt=""
+            alt={blog.title}
             layout="fill"
             objectFit="cover"
             className={cn(

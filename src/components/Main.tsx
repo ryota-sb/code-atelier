@@ -37,7 +37,7 @@ export default function Post({ blogs, tags }: Props) {
               {/* new state */}
               <div className="absolute top-4 -left-4 z-10 w-28 bg-white">
                 <div className="text-center font-raleway">
-                  {isWithinThreeDays(blog.createdAt) ? <p>New</p> : null}
+                  {isWithinThreeDays(blog.publishedAt) ? <p>New</p> : null}
                 </div>
               </div>
               <BlurImage blog={blog} />
