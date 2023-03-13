@@ -32,7 +32,7 @@ yarn add @fortawesome/react-fontawesome@latest
 yarn add @tailwindcss/aspect-ratio
 ```
 
-### アスペクト比の指定を簡単にできるようにするためのライブラリ
+#### アスペクト比の指定を簡単にできるようにするためのライブラリ
 
 <br>
 
@@ -40,6 +40,6 @@ yarn add @tailwindcss/aspect-ratio
 yarn add @tailwindcss/typography
 ```
 
-### 自動的にいい感じになるように CSS を付与してくれるライブラリ
+#### 自動的にいい感じになるように CSS を付与してくれるライブラリ
 
 #### 使用時は、親要素の class に prose をつける
