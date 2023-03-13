@@ -1,17 +1,22 @@
-# My Blog
+# Code Atelier（Tech Blog）
 
-- Next.js(TypeScript)
+## 使用技術
+
+- Next.js
+- TypeScript
 - microCMS
 - TailwindCSS
+- Google Analytics
 
-# Create project
+<br>
+
+# プロジェクト作成
 
 ```bash
 yarn create next-app --ts -e with-tailwindcss
-yarn add @emotion/react @emotion/cache @emotion/server @emotion/styled
 ```
 
-# Font Awesome 導入
+# Font Awesome
 
 ```bash
 yarn add @fortawesome/fontawesome-svg-core
@@ -23,24 +28,18 @@ yarn add @fortawesome/react-fontawesome@latest
 
 # TailwindCSS ライブラリ
 
-### アスペクト比の指定を簡単にできるようにするためのライブラリ
-
 ```
 yarn add @tailwindcss/aspect-ratio
 ```
 
-### 自動的にいい感じになるように CSS を付与してくれるライブラリ
+### アスペクト比の指定を簡単にできるようにするためのライブラリ
 
-#### 使用時は、親要素の class に prose をつける
+<br>
 
 ```
 yarn add @tailwindcss/typography
 ```
 
-# Google Analytics 導入
+### 自動的にいい感じになるように CSS を付与してくれるライブラリ
 
-### TypeScript に対応
-
-```
-npm install -D @types/gtag.js
-```
+#### 使用時は、親要素の class に prose をつける
