@@ -71,10 +71,10 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         imageUrl={blog.image.url}
       />
       <div className="flex-grow">
-        <h1 className="p-10 text-center font-notoserif text-3xl">
+        <h1 className="p-10 text-center font-notoserif text-3xl text-gray-three">
           {blog.title}
         </h1>
-        <div className="prose mx-auto mb-10 min-h-screen max-w-screen-lg bg-white p-10 shadow-md">
+        <div className="prose mx-auto mb-10 min-h-screen max-w-screen-lg bg-cream-four p-10 shadow-md">
           <div className="flex justify-between">
             <div className="flex items-center gap-1">
               <FontAwesomeIcon icon={faClock} />

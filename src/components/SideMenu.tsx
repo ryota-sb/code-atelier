@@ -11,7 +11,7 @@ type Props = {
 
 // 画面サイズがxl以上ならtrueを返す
 function isBreakPointXl() {
-  const { height, width } = getWindowSize();
+  const { width } = getWindowSize();
   const BREAK_POINT_PX_XL = 1280;
   return width >= BREAK_POINT_PX_XL;
 }

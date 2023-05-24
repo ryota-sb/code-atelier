@@ -1,8 +1,8 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function AboutMe() {
   return (
-    <div className="mb-10 bg-white p-6">
+    <div className="mb-10 bg-cream-four p-6">
       <div className="grid grid-cols-2 gap-x-6">
         <div className="aspect-w-1 aspect-h-1 col-span-1">
           <Image
@@ -14,7 +14,7 @@ export default function AboutMe() {
           />
         </div>
         <div className="col-span-1">
-          <h1 className="font-raleway">Matsui Ryota</h1>
+          <h1 className="font-raleway text-gray-three">Matsui Ryota</h1>
         </div>
       </div>
     </div>

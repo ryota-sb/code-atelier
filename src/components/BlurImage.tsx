@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState } from "react";
 
 import type { Blog } from "types/blog";
@@ -14,7 +14,7 @@ export default function BlurImage({ blog }: { blog: Blog }) {
   return (
     <Link href={`/blog/${blog.id}`}>
       <div className="group cursor-pointer">
-        <div className="aspect-w-16 aspect-h-9 w-full overflow-hidden border border-gray-200 bg-gray-200">
+        <div className="border-gray-200 bg-gray-200 aspect-w-16 aspect-h-9 w-full overflow-hidden border">
           <Image
             src={blog.image.url}
             alt={blog.title}

@@ -23,41 +23,14 @@ export default function Tags({ tags }: Props) {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-cream-four">
       <div className="flex items-center justify-between border-b px-6 py-4">
         <div className="flex items-center">
-          <FontAwesomeIcon icon={faTag} />
-          <h2 className="pl-2 font-raleway text-xl">Tags</h2>
+          <FontAwesomeIcon icon={faTag} className="text-gray-three" />
+          <h2 className="pl-2 font-raleway text-xl text-gray-three">Tags</h2>
         </div>
         {router.pathname !== "/" ? (
           <div className="group relative">
-            <span
-              className={[
-                "whitespace-nowrap",
-                "bg-red-300",
-                "px-2",
-                "py-1",
-                "text-white",
-                "absolute",
-                "-top-12",
-                "left-1/2",
-                "-translate-x-1/2",
-                "before:content-['']",
-                "before:absolute",
-                "before:-translate-x-1/2",
-                "before:left-1/2",
-                "before:top-full",
-                "before:border-4",
-                "before:border-transparent",
-                "before:border-t-red-300",
-                "opacity-0",
-                "group-hover:opacity-100",
-                "transition",
-                "pointer-events-none",
-              ].join(" ")}
-            >
-              タグのリセット
-            </span>
             <Link href="/">
               <FontAwesomeIcon icon={faRotate} className="cursor-pointer" />
             </Link>
@@ -70,12 +43,12 @@ export default function Tags({ tags }: Props) {
             className={cn(
               "cursor-pointer rounded p-2",
               isCurrentPath(`/tagsBlog/${tag.id}`)
-                ? "bg-blue-100"
-                : "hover:bg-gray-200"
+                ? "bg-olive-one"
+                : "hover:bg-leaf-one"
             )}
           >
             <Link href={`/tagsBlog/${tag.id}`}>
-              <li>{tag.tag}</li>
+              <li className="text-gray-three">{tag.tag}</li>
             </Link>
           </div>
         </ul>
