@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export default function AboutMe() {
   return (
@@ -7,8 +7,8 @@ export default function AboutMe() {
         <div className="aspect-w-1 aspect-h-1 col-span-1">
           <Image
             src="/imgs/ryota.jpg"
-            layout="fill"
-            objectFit="contain"
+            fill
+            style={{ objectFit: "contain" }}
             className="rounded-md"
             alt="Ryota"
           />

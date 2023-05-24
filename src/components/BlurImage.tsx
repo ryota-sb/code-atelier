@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useState } from "react";
 
 import type { Blog } from "types/blog";
@@ -18,8 +18,8 @@ export default function BlurImage({ blog }: { blog: Blog }) {
           <Image
             src={blog.image.url}
             alt={blog.title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             className={cn(
               "duration-700 ease-in-out group-hover:opacity-40",
               isLoading
