@@ -7,7 +7,8 @@ export default function AboutMe() {
         <div className="aspect-w-1 aspect-h-1 col-span-1">
           <Image
             src="/imgs/ryota.jpg"
-            fill
+            width={200}
+            height={200}
             style={{ objectFit: "contain" }}
             className="rounded-md"
             alt="Ryota"

@@ -18,8 +18,9 @@ export default function BlurImage({ blog }: { blog: Blog }) {
           <Image
             src={blog.image.url}
             alt={blog.title}
-            fill
             style={{ objectFit: "cover" }}
+            width={500}
+            height={500}
             className={cn(
               "duration-700 ease-in-out group-hover:opacity-40",
               isLoading
