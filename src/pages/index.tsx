@@ -1,5 +1,5 @@
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
-// import HeadMeta from "components/HeadMeta";
+import HeadMeta from "components/HeadMeta";
 
 import { Blog, Tag } from "types/blog";
 
@@ -31,13 +31,13 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }: Props) => {
   return (
     <Layout>
-      {/* <HeadMeta
+      <HeadMeta
         title="Code Atelier"
         description="Code Atelierでは、プログラミング関係の記事をメインに載せています。"
         url="https://code-atelier.vercel.app"
         type="website"
-        imageUrl="/imgs/code-atelier.png"
-      /> */}
+        imageUrl="../../public/imgs/code-atelier.png"
+      />
       <Main blogs={blogs} tags={tags} />
     </Layout>
   );
