@@ -26,7 +26,7 @@ function isWithinThreeDays(date: Date) {
   return getDateDifference(date) <= CONVERT_3_DAYS_TO_MILLISECONDS;
 }
 
-export default function Post({ blogs, tags }: Props) {
+export default function Main({ blogs, tags }: Props) {
   return (
     <div className="grid flex-grow p-6 lg:p-8 xl:grid-cols-6 xl:p-10">
       {/* 記事一覧 */}

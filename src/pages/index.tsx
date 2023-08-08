@@ -36,7 +36,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         description="Code Atelierでは、プログラミング関係の記事をメインに載せています。"
         url="https://code-atelier.vercel.app"
         type="website"
-        imageUrl="../../public/imgs/code-atelier.png"
+        imageUrl="https://code-atelier.vercel.app/imgs/code-atelier.png"
       />
       <Main blogs={blogs} tags={tags} />
     </Layout>
