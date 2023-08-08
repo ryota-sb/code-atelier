@@ -12,6 +12,7 @@ export default function HeadMeta(props: Props) {
   const { title, description, url, type, imageUrl } = props;
   return (
     <Head>
+      <link rel="canonical" href="https://code-atelier.vercel.app/" />
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="twitter:card" content="summary_large_image" />
