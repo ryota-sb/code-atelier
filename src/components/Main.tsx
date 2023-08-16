@@ -43,7 +43,7 @@ export default function Main({ blogs, tags }: Props) {
               <BlurImage blog={blog} />
 
               <div className="mt-2 flex items-center">
-                <FontAwesomeIcon icon={faTag} className="text-gray-three" />
+                {/* <FontAwesomeIcon icon={faTag} className="text-gray-three" /> */}
                 {blog.tags.map((tag) => (
                   <div className="flex pl-2" key={tag.id}>
                     <p className="font-raleway text-sm text-gray-three">
