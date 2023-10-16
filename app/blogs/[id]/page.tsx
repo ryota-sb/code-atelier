@@ -10,7 +10,6 @@ import { client } from "libs/client";
 import type { Blog } from "types/blog";
 
 import HeadMeta from "components/HeadMeta";
-import Layout from "components/Layout";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
@@ -62,7 +61,7 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   highlightedBody,
 }: Props) => {
   return (
-    <Layout>
+    <>
       <HeadMeta
         title={blog.title}
         description={blog.description}
@@ -88,7 +87,7 @@ const BlogId: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <div dangerouslySetInnerHTML={{ __html: highlightedBody }}></div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

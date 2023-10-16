@@ -9,8 +9,6 @@ import { useEffect } from "react";
 
 import type { Blog } from "types/blog";
 
-import Layout from "components/Layout";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
@@ -59,7 +57,7 @@ const PreviewPage: NextPage<Props> = ({ blog, highlightedBody }: Props) => {
   });
 
   return (
-    <Layout>
+    <>
       <div className="flex-grow">
         <div className="flex items-center justify-center">
           <div className="m-4 flex w-32 justify-center rounded-lg bg-green-five p-2">
@@ -83,7 +81,7 @@ const PreviewPage: NextPage<Props> = ({ blog, highlightedBody }: Props) => {
           <div dangerouslySetInnerHTML={{ __html: highlightedBody }}></div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

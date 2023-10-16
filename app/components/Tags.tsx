@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 import type { Tag } from "types/blog";
 
@@ -11,11 +11,11 @@ import { faRotate } from "@fortawesome/free-solid-svg-icons";
 type Props = { tags: Tag[] };
 
 export default function Tags({ tags }: Props) {
-  const router = useRouter();
+  const pathname = usePathname();
 
   // 現在のパスならTrue
   const isCurrentPath = (url: string): boolean => {
-    return router.asPath.startsWith(url);
+    return pathname!.startsWith(url);
   };
 
   const cn = (...classes: string[]) => {
@@ -29,7 +29,7 @@ export default function Tags({ tags }: Props) {
           <FontAwesomeIcon icon={faTag} className="text-gray-three" />
           <h2 className="pl-2 font-raleway text-xl text-gray-three">Tags</h2>
         </div>
-        {router.pathname !== "/" ? (
+        {pathname !== "/" ? (
           <div className="group relative">
             <Link href="/">
               <FontAwesomeIcon icon={faRotate} className="cursor-pointer" />
@@ -38,7 +38,7 @@ export default function Tags({ tags }: Props) {
         ) : null}
       </div>
       {tags.map((tag) => (
-        <ul key={tag.id} className="py-2 px-6">
+        <ul key={tag.id} className="px-6 py-2">
           <div
             className={cn(
               "cursor-pointer rounded p-2",

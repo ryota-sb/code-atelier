@@ -9,7 +9,6 @@ import { Blog, Tag } from "types/blog";
 
 import { client } from "libs/client";
 
-import Layout from "components/Layout";
 import Main from "components/Main";
 
 const TagPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
@@ -17,9 +16,9 @@ const TagPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   tags,
 }: Props) => {
   return (
-    <Layout>
+    <>
       <Main blogs={blogs} tags={tags} />
-    </Layout>
+    </>
   );
 };
 

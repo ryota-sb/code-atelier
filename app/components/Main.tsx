@@ -1,11 +1,10 @@
-import BlurImage from "components/BlurImage";
-import SideMenu from "components/SideMenu";
+import BlurImage from "./BlurImage";
+import SideMenu from "./SideMenu";
 
 import type { Blog, Tag } from "types/blog";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { faTag } from "@fortawesome/free-solid-svg-icons";
 
 // 日付のフォーマット変更
 const getFormattedDate = (date: Date): string =>
@@ -35,7 +34,7 @@ export default function Main({ blogs, tags }: Props) {
           {blogs.map((blog) => (
             <div key={blog.id} className="relative">
               {/* new state */}
-              <div className="absolute top-4 -left-4 z-10 w-28 bg-cream-four">
+              <div className="absolute -left-4 top-4 z-10 w-28 bg-cream-four">
                 <div className="text-center font-raleway">
                   {isWithinThreeDays(blog.publishedAt) ? <p>New</p> : null}
                 </div>

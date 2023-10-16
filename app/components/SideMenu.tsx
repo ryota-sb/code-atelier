@@ -1,5 +1,7 @@
-import AboutMe from "components/AboutMe";
-import Tags from "components/Tags";
+"use client"
+
+import AboutMe from "./AboutMe";
+import Tags from "./Tags";
 
 import getWindowSize from "hooks/getWindowSize";
 

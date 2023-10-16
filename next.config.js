@@ -6,6 +6,6 @@ module.exports = {
     domains: ["images.microcms-assets.io"],
   },
   eslint: {
-    dirs: ["src"],
+    dirs: ["app"],
   },
 };
