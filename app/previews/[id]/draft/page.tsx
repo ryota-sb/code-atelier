@@ -1,7 +1,5 @@
 import { getPreviewBlog } from "libs/client";
 
-import type { Blog } from "types/blog";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
@@ -10,21 +8,15 @@ import { faRotate } from "@fortawesome/free-solid-svg-icons";
 const getFormattedDate = (date: Date): string =>
   new Date(date).toLocaleDateString();
 
-type Props = {
-  blog: Blog;
-  highlightedBody: string;
-};
-
-const PreviewPage = async ({
-  params,
-  searchParams,
-}: {
+interface Props {
   params: { id: string };
-  searchParams: { [key: string]: string };
-}) => {
+  searchParams: { draftKey: string };
+}
+
+const PreviewPage = async ({ params, searchParams }: Props) => {
   const { id } = params;
-  const { page } = searchParams
-  const { blog, highlightedBody } = await getPreviewBlog(id, page);
+  const { draftKey } = searchParams;
+  const { blog, highlightedBody } = await getPreviewBlog(id, draftKey);
   return (
     <>
       <div className="flex-grow">

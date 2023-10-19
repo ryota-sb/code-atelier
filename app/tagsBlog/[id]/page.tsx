@@ -2,7 +2,11 @@ import { getAllTagIds, filterBlogsByTag } from "libs/client";
 
 import Main from "components/Main";
 
-const TagPage = async ({ params }: { params: { id: string } }) => {
+interface Props {
+  params: { id: string }
+}
+
+const TagPage = async ({ params }: Props) => {
   const { id } = params;
   const { blogs, tags } = await filterBlogsByTag(id);
 

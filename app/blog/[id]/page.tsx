@@ -14,9 +14,13 @@ export const generateStaticParams = async () => {
 const getFormattedDate = (date: Date): string =>
   new Date(date).toLocaleDateString();
 
-const BlogId = async ({ params }: { params: { id: string } }) => {
-  const { id } = params
-  const { blog, highlightedBody } = await getBlog(id)
+interface Props {
+  params: { id: string };
+}
+
+const BlogId = async ({ params }: Props) => {
+  const { id } = params;
+  const { blog, highlightedBody } = await getBlog(id);
   return (
     <>
       <HeadMeta
