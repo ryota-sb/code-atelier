@@ -1,46 +1,10 @@
-import type {
-  GetServerSideProps,
-  NextPage,
-  GetServerSidePropsContext,
-} from "next";
-import { client } from "libs/client";
-
-import { useEffect } from "react";
+import { getPreviewBlog } from "libs/client";
 
 import type { Blog } from "types/blog";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
-
-import cheerio from "cheerio";
-import hljs from "highlight.js";
-import "highlight.js/styles/hybrid.css";
-
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context: GetServerSidePropsContext
-) => {
-  const blog = await client.get({
-    endpoint: "blog",
-    contentId: context.query.id as string,
-    // contentId: "c9e_wm5l0",
-    queries: { draftKey: context.query.draftKey as string },
-  });
-
-  const $ = cheerio.load(blog.body || "");
-  $("pre code").each((_, elm) => {
-    const result = hljs.highlightAuto($(elm).text());
-    $(elm).html(result.value);
-    $(elm).addClass("hljs");
-  });
-
-  return {
-    props: {
-      blog,
-      highlightedBody: $.html(),
-    },
-  };
-};
 
 // 日付のフォーマット変更
 const getFormattedDate = (date: Date): string =>
@@ -51,11 +15,16 @@ type Props = {
   highlightedBody: string;
 };
 
-const PreviewPage: NextPage<Props> = ({ blog, highlightedBody }: Props) => {
-  useEffect(() => {
-    console.log(blog);
-  });
-
+const PreviewPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string };
+}) => {
+  const { id } = params;
+  const { page } = searchParams
+  const { blog, highlightedBody } = await getPreviewBlog(id, page);
   return (
     <>
       <div className="flex-grow">

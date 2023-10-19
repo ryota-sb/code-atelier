@@ -65,6 +65,26 @@ export const getBlog = async (blogId: string) => {
   };
 };
 
+export const getPreviewBlog = async (blogId: string, draftKey: string) => {
+  const blogData = await client.get({
+    endpoint: "blog",
+    contentId: blogId,
+    queries: { draftKey }
+  });
+
+  const $ = cheerio.load(blogData.body || "");
+  $("pre code").each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text());
+    $(elm).html(result.value);
+    $(elm).addClass("hljs");
+  });
+
+  return {
+    blog: blogData,
+    highlightedBody: $.html(),
+  };
+}
+
 // TagIdで絞り込んだBlog記事取得
 export const filterBlogsByTag = async (tagId: string) => {
   const filterBlogData = await client.get({
