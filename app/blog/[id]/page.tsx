@@ -13,11 +13,11 @@ export const generateStaticParams = async () => {
 };
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const BlogId = async ({ params }: Props) => {
-  const { id } = params;
+  const { id } = await params;
   const { blog, highlightedBody } = await getBlog(id);
   return (
     <>

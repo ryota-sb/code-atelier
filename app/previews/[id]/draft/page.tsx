@@ -7,13 +7,13 @@ import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
-  params: { id: string };
-  searchParams: { draftKey: string };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ draftKey: string }>;
 }
 
 const PreviewPage = async ({ params, searchParams }: Props) => {
-  const { id } = params;
-  const { draftKey } = searchParams;
+  const { id } = await params;
+  const { draftKey } = await searchParams;
   const { blog, highlightedBody } = await getPreviewBlog(id, draftKey);
   return (
     <>
