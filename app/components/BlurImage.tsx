@@ -22,13 +22,15 @@ export default function BlurImage({ blog }: { blog: Blog }) {
             alt={blog.title}
             style={{ objectFit: "cover" }}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={cn(
               "duration-700 ease-in-out group-hover:opacity-40",
               isLoading
                 ? "scale-100 blur-2xl grayscale"
                 : "scale-100 blur-0 grayscale-0"
             )}
-            onLoadingComplete={() => setLoading(false)}
+            priority={true}
+            onLoad={() => setLoading(false)}
           />
         </div>
       </div>
