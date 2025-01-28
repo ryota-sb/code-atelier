@@ -37,19 +37,13 @@ export const getTags = async () => {
 // 記事ごとの全てのパスを配列で取得
 export const getAllBlogIds = async () => {
   const blogs = await getBlogs();
-  const paths = blogs.map((blog: Blog) => {
-    id: `/blogs/${blog.id}`;
-  });
-  return paths;
+  return blogs.map((blog: Blog) => ({ BlogId: blog.id }));
 };
 
 // タグごとの全てのパスを配列で取得
 export const getAllTagIds = async () => {
   const tags = await getTags();
-  const paths = tags.map((tag: Tag) => {
-    id: `/tagsBlog/${tag.id}`;
-  });
-  return paths;
+  return tags.map((tag: Tag) => ({ TagId: tag.id }));
 };
 
 export const getBlog = async (blogId: string) => {
@@ -70,7 +64,7 @@ export const getBlog = async (blogId: string) => {
 
 export const getPreviewBlog = async (blogId: string, draftKey: string) => {
   const blog = await client.getListDetail<Blog>({
-    endpoint: "blog",
+    endpoint: "blogs",
     contentId: blogId,
     queries: { draftKey }
   });
@@ -88,7 +82,7 @@ export const getPreviewBlog = async (blogId: string, draftKey: string) => {
 // TagIdで絞り込んだ記事取得
 export const filterBlogsByTag = async (tagId: string) => {
   const filterBlog = await client.getList<Blog>({
-    endpoint: "blog",
+    endpoint: "blogs",
     queries: { filters: `tags[contains]${tagId}` },
   });
   const tags = await getTags();
