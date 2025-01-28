@@ -3,7 +3,7 @@ import { createClient } from "microcms-js-sdk";
 import type { Blog, Tag } from "types/blog";
 
 // 記事のコードエリアのシンタックスハイライト
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import hljs from "highlight.js";
 import "highlight.js/styles/hybrid.css";
 
@@ -12,32 +12,38 @@ export const client = createClient({
   apiKey: process.env.API_KEY || "",
 });
 
-// Blog記事 すべて取得
+// 記事一覧取得
 export const getBlogs = async () => {
-  const blogData = await client.get({
-    endpoint: "blog",
-  });
-  return blogData.contents as Blog[];
+  try {
+    const blog = await client.getList<Blog>({ endpoint: "blogs" });
+    return blog.contents
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
 
-// Tag すべて取得
+// タグ一覧取得
 export const getTags = async () => {
-  const tagData = await client.get({
-    endpoint: "tag",
-  });
-  return tagData.contents as Tag[];
+  try {
+    const tag = await client.getList<Tag>({ endpoint: "tags" });
+    return tag.contents;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
 
-// Blogのパスを配列で取得
+// 記事ごとの全てのパスを配列で取得
 export const getAllBlogIds = async () => {
   const blogs = await getBlogs();
   const paths = blogs.map((blog: Blog) => {
-    id: `/blog/${blog.id}`;
+    id: `/blogs/${blog.id}`;
   });
   return paths;
 };
 
-// Tagのパスを配列で取得
+// タグごとの全てのパスを配列で取得
 export const getAllTagIds = async () => {
   const tags = await getTags();
   const paths = tags.map((tag: Tag) => {
@@ -47,53 +53,48 @@ export const getAllTagIds = async () => {
 };
 
 export const getBlog = async (blogId: string) => {
-  const blogData = await client.get({
-    endpoint: "blog",
+  const blog = await client.getListDetail<Blog>({
+    endpoint: "blogs",
     contentId: blogId,
   });
 
-  const $ = cheerio.load(blogData.body || "");
+  const $ = cheerio.load(blog.body || "");
   $("pre code").each((_, elm) => {
     const result = hljs.highlightAuto($(elm).text());
     $(elm).html(result.value);
     $(elm).addClass("hljs");
   });
 
-  return {
-    blog: blogData,
-    highlightedBody: $.html(),
-  };
+  return { blog, highlightedBody: $.html() };
 };
 
 export const getPreviewBlog = async (blogId: string, draftKey: string) => {
-  const blogData = await client.get({
+  const blog = await client.getListDetail<Blog>({
     endpoint: "blog",
     contentId: blogId,
     queries: { draftKey }
   });
 
-  const $ = cheerio.load(blogData.body || "");
+  const $ = cheerio.load(blog.body || "");
   $("pre code").each((_, elm) => {
     const result = hljs.highlightAuto($(elm).text());
     $(elm).html(result.value);
     $(elm).addClass("hljs");
   });
 
-  return {
-    blog: blogData,
-    highlightedBody: $.html(),
-  };
+  return { blog, highlightedBody: $.html() };
 }
 
-// TagIdで絞り込んだBlog記事取得
+// TagIdで絞り込んだ記事取得
 export const filterBlogsByTag = async (tagId: string) => {
-  const filterBlogData = await client.get({
+  const filterBlog = await client.getList<Blog>({
     endpoint: "blog",
     queries: { filters: `tags[contains]${tagId}` },
   });
   const tags = await getTags();
+
   return {
-    blogs: filterBlogData.contents as Blog[],
-    tags: tags,
+    blogs: filterBlog.contents,
+    tags: tags
   };
 };
