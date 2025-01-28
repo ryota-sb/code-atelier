@@ -1,12 +1,10 @@
 import { getPreviewBlog } from "libs/client";
 
+import { getFormattedDate } from "utils/date";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
-
-// 日付のフォーマット変更
-const getFormattedDate = (date: Date): string =>
-  new Date(date).toLocaleDateString();
 
 interface Props {
   params: { id: string };

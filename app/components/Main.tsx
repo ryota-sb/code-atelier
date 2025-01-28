@@ -3,27 +3,12 @@ import SideMenu from "./SideMenu";
 
 import type { Blog, Tag } from "types/blog";
 
+import { getFormattedDate, isWithinThreeDays } from "utils/date";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 
-// 日付のフォーマット変更
-const getFormattedDate = (date: Date): string =>
-  new Date(date).toLocaleDateString();
-
 type Props = { blogs: Blog[]; tags: Tag[] };
-
-// 今日の日付 - 記事投稿日
-function getDateDifference(date: Date) {
-  const getToday = new Date().getTime();
-  const createAt = new Date(date).getTime();
-  return getToday - createAt;
-}
-
-// 記事投稿から３日以内ならtrue
-function isWithinThreeDays(date: Date) {
-  const CONVERT_3_DAYS_TO_MILLISECONDS = 259200000;
-  return getDateDifference(date) <= CONVERT_3_DAYS_TO_MILLISECONDS;
-}
 
 export default function Main({ blogs, tags }: Props) {
   return (
